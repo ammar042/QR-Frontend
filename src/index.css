@@ -1,0 +1,72 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/* ===== Global Responsive Base ===== */
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+img, svg, video, canvas {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+table {
+  max-width: 100%;
+}
+
+input, select, textarea, button {
+  max-width: 100%;
+  font-family: inherit;
+}
+
+/* Prevents iOS auto-zoom on inputs with font-size < 16px */
+@media screen and (max-width: 600px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}
+
+/* ===== Project-wide layout safety ===== */
+:root { color-scheme: light; }
+#root { width: 100%; min-height: 100vh; overflow-x: clip; }
+body { min-width: 320px; }
+
+*, *::before, *::after { min-width: 0; }
+
+h1, h2, h3, h4, h5, h6, p, a, span, td, th, button, label {
+  overflow-wrap: anywhere;
+}
+
+button, input, select, textarea { min-width: 0; }
+input, select, textarea { width: 100%; }
+
+/* Tables never force the page wider than the screen. Individual table areas can scroll horizontally. */
+.tableWrap, [class*="tableWrap"] {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 768px) {
+  html, body, #root { overflow-x: hidden; }
+}
