@@ -9,6 +9,7 @@ import ReportsCard from "./ReportsCard/ReportsCard";
 const GAP = 90;
 const BLOOD_GROUPS = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 
+const API_URL = "https://qr-backendd.onrender.com";
 function daysUntil(lastDate) {
   if (!lastDate) return 0;
   const diff = Math.floor((new Date() - new Date(lastDate)) / 86400000);
@@ -30,7 +31,7 @@ function RecordModal({ donor, token, onClose, onSuccess }) {
     if (!form.units || !form.date) return setError("Units and date are required.");
     setSaving(true); setError("");
     try {
-      const res = await fetch("/api/org/donations/record", {
+      const res = await fetch(`${API_URL}/api/org/donations/record`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ donorId: donor._id, ...form }),
@@ -92,7 +93,7 @@ function DispenseModal({ token, bloodStock, onClose, onSuccess }) {
     if (Number(form.units) > available) return setError(`Only ${available} ml of ${form.bloodGroup} available.`);
     setSaving(true); setError("");
     try {
-      const res = await fetch("/api/org/stock/dispense", {
+      const res = await fetch(`${API_URL}/api/org/stock/dispense`, {
         method: "POST",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify(form),
@@ -282,7 +283,7 @@ function LocationCard({ org, token, onUpdated }) {
 
   const handleUpdateLocation = ({ lat, lng }) => {
     setStatus("Saving...");
-    fetch("/api/org/update-location", {
+    fetch(`${API_URL}/api/org/update-location`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -351,9 +352,9 @@ export default function OrgDashboard() {
     try {
       const headers = { Authorization: `Bearer ${token}` };
       const [orgRes, statsRes, donorsRes] = await Promise.all([
-        fetch("/api/org/profile", { headers }),
-        fetch("/api/org/stats",   { headers }),
-        fetch("/api/org/donors",  { headers }),
+        fetch(`${API_URL}/api/org/profile`, { headers }),
+        fetch(`${API_URL}/api/org/stats`,   { headers }),
+        fetch(`${API_URL}/api/org/donors`,  { headers }),
       ]);
       const [orgData, statsData, donorsData] = await Promise.all([
         orgRes.json(), statsRes.json(), donorsRes.json(),
