@@ -39,7 +39,7 @@ const token = localStorage.getItem("token");
       navigate("/admin/login");
       return;
     }
-    fetch("http://localhost:5000/api/admin/overview", {
+    fetch("https://qr-backendd.onrender.com/api/admin/overview", {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((r) => r.json())
