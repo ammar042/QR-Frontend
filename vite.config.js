@@ -7,7 +7,7 @@ export default defineConfig({
     proxy: {
       // Any request starting with /api gets forwarded to your backend
       '/api': {
-        target: 'http://localhost:5000',
+        target: 'https://qr-backendd.onrender.com',
         changeOrigin: true,
       }
     }

@@ -40,7 +40,7 @@ const Login = () => {
 
       // 1. Try donor login
       try {
-        const response = await axios.post("http://localhost:5000/api/auth/login", {
+        const response = await axios.post(":5000/api/auth/login", {
           identifier: formData.identifier,
           password: formData.password,
         });
