@@ -9,7 +9,7 @@ import ReportsCard from "./ReportsCard/ReportsCard";
 const GAP = 90;
 const BLOOD_GROUPS = ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"];
 
-const API_URL = "https://qr-backendd.onrender.com";
+import { API_URL } from "../../config/api";
 function daysUntil(lastDate) {
   if (!lastDate) return 0;
   const diff = Math.floor((new Date() - new Date(lastDate)) / 86400000);

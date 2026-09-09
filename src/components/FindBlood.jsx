@@ -152,7 +152,7 @@ const FindBlood = () => {
             ...(updatedForm.bloodGroup ? { bloodGroup: updatedForm.bloodGroup } : {}),
           });
 
-          const searchRes = await fetch(`/api/search/blood?${params}`);
+          const searchRes = await fetch(`${API_URL}/api/search/blood?${params}`);
           const searchData = await searchRes.json();
 
           if (!searchRes.ok) {
@@ -202,7 +202,7 @@ const FindBlood = () => {
         district: formData.district,
         ...(formData.bloodGroup ? { bloodGroup: formData.bloodGroup } : {}),
       });
-      const res  = await fetch(`/api/search/blood?${params}`);
+      const res  = await fetch(`${API_URL}/api/search/blood?${params}`);
       const data = await res.json();
       if (!res.ok) return setError(data.error || "Search failed.");
       setResults(data.results);
@@ -343,3 +343,4 @@ const FindBlood = () => {
 };
 
 export default FindBlood;
+import { API_URL } from "../config/api";

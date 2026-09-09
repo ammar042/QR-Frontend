@@ -23,7 +23,7 @@ const LocationCard = ({ donor }) => {
   const handleUpdateLocation = ({ lat, lng }) => {
     setStatus("Saving...");
     const token = localStorage.getItem("token");
-    fetch("https://qr-backendd.onrender.com/api/donor/update-location", {
+    fetch(`${API_URL}/api/donor/update-location`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -90,7 +90,7 @@ export default function DonorDashboard() {
 
   // ── Fetch donor profile ──
   useEffect(() => {
-    fetch("https://qr-backendd.onrender.com/api/donor/profile", {
+    fetch(`${API_URL}/api/donor/profile`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((r) => r.json())
@@ -154,3 +154,4 @@ export default function DonorDashboard() {
     </div>
   );
 }
+import { API_URL } from "../../config/api";

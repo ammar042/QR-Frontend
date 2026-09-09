@@ -3,7 +3,7 @@ import styles from "./RegisterOrganization.module.css";
 import LocationPicker from "./LocationPicker";
 
 
-const API_URL = "https://qr-backendd.onrender.com";
+import { API_URL } from "../config/api";
 const PROVINCE_DISTRICTS = {
   Punjab: ["Lahore","Faisalabad","Rawalpindi","Gujranwala","Multan","Sialkot","Bahawalpur","Sargodha","Sheikhupura","Jhang","Rahim Yar Khan","Gujrat","Kasur","Sahiwal","Okara","Dera Ghazi Khan","Muzaffargarh","Pakpattan","Hafizabad","Attock"],
   Sindh: ["Karachi","Hyderabad","Sukkur","Larkana","Nawabshah","Mirpur Khas","Jacobabad","Shikarpur","Khairpur","Dadu","Thatta","Badin","Sanghar","Umerkot","Tando Allahyar"],
@@ -78,7 +78,7 @@ const RegisterOrganization = () => {
     if (!otp || otp.length !== 6) return setError("Enter the 6-digit OTP.");
     setLoading(true);
     try {
-      const res = await fetch("/api/org/register/verify-otp", {
+      const res = await fetch(`${API_URL}/api/org/register/verify-otp`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...formData, otp }),

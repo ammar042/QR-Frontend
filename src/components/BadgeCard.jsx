@@ -7,7 +7,7 @@ export default function BadgeCard() {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/badges", {
+    fetch(`${API_URL}/api/badges`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((r) => r.json())
@@ -45,3 +45,4 @@ export default function BadgeCard() {
     </div>
   );
 }
+import { API_URL } from "../config/api";

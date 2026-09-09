@@ -40,7 +40,7 @@ const Login = () => {
 
       // 1. Try donor login
       try {
-        const response = await axios.post("https://qr-backendd.onrender.com/api/auth/login", {
+        const response = await axios.post(`${API_URL}/api/auth/login`, {
           identifier: formData.identifier,
           password: formData.password,
         });
@@ -53,7 +53,7 @@ const Login = () => {
 
         // 2. Try organization login
         try {
-          const response = await axios.post("https://qr-backendd.onrender.com/api/org/login", {
+        const response = await axios.post(`${API_URL}/api/org/login`, {
             email: formData.identifier,
             phone: formData.identifier,
             password: formData.password,
@@ -66,7 +66,7 @@ const Login = () => {
           }
 
           // 3. Try admin login
-          const response = await axios.post("https://qr-backendd.onrender.com/api/admin/login", {
+        const response = await axios.post(`${API_URL}/api/admin/login`, {
             email: formData.identifier,
             password: formData.password,
           });
@@ -98,7 +98,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "https://qr-backendd.onrender.com/api/auth/send-login-otp",
+        `${API_URL}/api/auth/send-login-otp`,
         {
           [formData.identifier.includes("@") ? "email" : "phone"]:
             formData.identifier,
@@ -121,7 +121,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "https://qr-backendd.onrender.com/api/auth/verify-login-otp",
+        `${API_URL}/api/auth/verify-login-otp`,
         {
           [formData.identifier.includes("@") ? "email" : "phone"]:
             formData.identifier,
@@ -252,3 +252,4 @@ const Login = () => {
 };
 
 export default Login;
+import { API_URL } from "../config/api";

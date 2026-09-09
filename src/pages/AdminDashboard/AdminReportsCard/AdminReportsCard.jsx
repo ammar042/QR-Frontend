@@ -40,7 +40,7 @@ export default function AdminReportsCard({ token, organizations = [] }) {
         params.set("end", endDate);
       }
 
-      const res = await fetch(`/api/admin/reports?${params}`, {
+      const res = await fetch(`${API_URL}/api/admin/reports?${params}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -296,3 +296,4 @@ export default function AdminReportsCard({ token, organizations = [] }) {
     </div>
   );
 }
+import { API_URL } from "../../../config/api";

@@ -24,7 +24,7 @@ export default function EditProfile() {
   const [msg, setMsg] = useState({ text: "", type: "" });
 
   useEffect(() => {
-    fetch("/api/donor/profile", {
+    fetch(`${API_URL}/api/donor/profile`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((r) => r.json())
@@ -41,7 +41,7 @@ export default function EditProfile() {
     setSaving(true);
     setMsg({ text: "", type: "" });
     try {
-      const res = await fetch("/api/donor/profile", {
+      const res = await fetch(`${API_URL}/api/donor/profile`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -172,3 +172,4 @@ export default function EditProfile() {
     </div>
   );
 }
+import { API_URL } from "../../config/api";

@@ -26,7 +26,7 @@ const Dashboard = () => {
     const verifyToken = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/auth/me",
+          `${API_URL}/api/auth/me`,
           {
             headers: {
               Authorization: `Bearer ${token}`
@@ -160,3 +160,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+import { API_URL } from "../config/api";

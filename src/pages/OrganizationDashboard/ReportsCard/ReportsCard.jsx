@@ -38,7 +38,7 @@ export default function ReportsCard({ token }) {
         params.append("end", endDate);
       }
 
-      const res = await fetch(`/api/org/reports?${params}`, {
+      const res = await fetch(`${API_URL}/api/org/reports?${params}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const data = await res.json();
@@ -338,3 +338,4 @@ export default function ReportsCard({ token }) {
     </div>
   );
 }
+import { API_URL } from "../../../config/api";

@@ -39,7 +39,7 @@ const token = localStorage.getItem("token");
       navigate("/admin/login");
       return;
     }
-    fetch("https://qr-backendd.onrender.com/api/admin/overview", {
+    fetch(`${API_URL}/api/admin/overview`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((r) => r.json())
@@ -226,3 +226,4 @@ const token = localStorage.getItem("token");
 };
 
 export default AdminDashboard;
+import { API_URL } from "../../config/api";

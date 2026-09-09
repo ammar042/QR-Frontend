@@ -81,8 +81,8 @@ const NearbyDonorsMap = ({ bloodGroup }) => {
           });
 
           const [donorRes, orgRes] = await Promise.all([
-            fetch(`/api/search/nearby?${params}`),
-            fetch(`/api/search/nearby-orgs?${params}`),
+            fetch(`${API_URL}/api/search/nearby?${params}`),
+            fetch(`${API_URL}/api/search/nearby-orgs?${params}`),
           ]);
           const donorData = await donorRes.json();
           const orgData = await orgRes.json();
@@ -233,3 +233,4 @@ const NearbyDonorsMap = ({ bloodGroup }) => {
 };
 
 export default NearbyDonorsMap;
+import { API_URL } from "../config/api";
