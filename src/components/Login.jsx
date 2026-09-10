@@ -253,4 +253,3 @@ const Login = () => {
 };
 
 export default Login;
-import { API_URL } from "../config/api";
