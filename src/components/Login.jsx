@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.css";
-
-const API_URL="https://qr-backend-inky.vercel.app/"
+import { API_URL } from "../config/api";
 
 // ── Helper: read role from response and go to correct dashboard ──────────────
 function redirectByRole(data, navigate) {
