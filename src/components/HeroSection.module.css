@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+.home {
+  min-height: 90vh;
+  min-height: 620px;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 110px clamp(24px, 8vw, 120px) 70px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.blobImg {
+  position: absolute;
+  top: -115px;
+  left: -15px;
+  width: min(55vw, 820px);
+  max-width: 62%;
+  height: auto;
+  z-index: -1;
+  pointer-events: none;
+  user-select: none;
+}
+
+.heroText {
+  width: min(100%, 560px);
+  margin-left: auto;
+  text-align: right;
+}
+
+.heroText h1 {
+  margin: 0 0 20px;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.15;
+  color: #34363b;
+  overflow-wrap: anywhere;
+}
+
+.heroText p {
+  margin: 0 0 25px;
+  font-size: clamp(0.95rem, 1.4vw, 1rem);
+  line-height: 1.7;
+  color: #555;
+  overflow-wrap: anywhere;
+}
+
+.heroBtn {
+  min-height: 48px;
+  padding: 12px 24px;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.heroBtn:hover {
+  background: #c2173d;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(194, 23, 61, 0.3);
+}
+
+.heroBtn:focus-visible {
+  outline: 3px solid rgba(194, 23, 61, 0.35);
+  outline-offset: 3px;
+}
+
+@media screen and (max-width: 1024px) {
+  .home {
+    min-height: 640px;
+    padding-right: clamp(24px, 6vw, 60px);
+    padding-left: clamp(24px, 6vw, 60px);
+  }
+
+  .blobImg {
+    width: 62%;
+    max-width: none;
+    top: -75px;
+    left: -80px;
+  }
+
+  .heroText { width: min(58%, 520px); }
+}
+
+@media screen and (max-width: 768px) {
+  .home {
+    min-height: 680px;
+    justify-content: center;
+    padding: 125px 24px 70px;
+  }
+
+  .blobImg {
+    width: 90%;
+    top: -30px;
+    left: -180px;
+    opacity: 0.9;
+  }
+
+  .heroText {
+    width: min(100%, 620px);
+    margin: 0;
+    text-align: center;
+  }
+
+  .heroText h1 { font-size: clamp(2rem, 7vw, 2.6rem); }
+}
+
+@media screen and (max-width: 480px) {
+  .home {
+    min-height: 620px;
+    padding: 110px 16px 55px;
+  }
+
+  .blobImg {
+    width: 125%;
+    top: -20px;
+    left: -280px;
+    opacity: 0.55;
+  }
+
+  .heroText h1 { font-size: 2rem; }
+  .heroText p { font-size: 0.95rem; }
+
+  .heroBtn {
+    width: 100%;
+    max-width: 280px;
+  }
+}
