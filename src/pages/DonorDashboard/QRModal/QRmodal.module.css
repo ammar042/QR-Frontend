@@ -33,7 +33,8 @@
 
 .canvas {
   border-radius: 12px;
-  margin: 12px 0;
+  display: block;
+  margin: 12px auto;
 }
 
 .eligBadge {
