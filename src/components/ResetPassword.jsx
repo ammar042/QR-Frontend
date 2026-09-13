@@ -34,7 +34,7 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className={styles["login-container"]}>
+    <div className={`${styles["login-container"]} ${styles["reset-container"]}`}>
       <div className={styles["login-card"]}>
         <h2>Password Reset</h2>
         <p>Choose a new password for your QR Based Blood Donation account.</p>
