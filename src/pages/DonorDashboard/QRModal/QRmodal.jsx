@@ -16,7 +16,7 @@ export default function QRModal({ donor, onClose }) {
   }
 
   // Build the data object that gets encoded in the QR
-  const qrData = JSON.stringify({
+  const donorData = {
     name:               `${donor.firstName} ${donor.lastName}`,
     bloodGroup:         donor.bloodGroup,
     age:                donor.age,
@@ -32,7 +32,12 @@ export default function QRModal({ donor, onClose }) {
     smoker:             donor.smoker             || "No",
     alcoholic:          donor.alcoholic          || "No",
     allergies:          donor.allergies          || "None",
-  });
+  };
+
+  // Encode a link to the app so phone scanners open the readable donor table.
+  const qrData = `${window.location.origin}/scan-result?data=${btoa(
+    encodeURIComponent(JSON.stringify(donorData))
+  )}`;
 
   useEffect(() => {
     if (canvasRef.current) {

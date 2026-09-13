@@ -11,6 +11,7 @@ import RegisterOrganization from "./components/RegisterOrganization";
 import FindBlood from "./components/FindBlood";
 import About from "./components/About";
 import Login from "./components/Login";
+import ResetPassword from "./components/ResetPassword";
 
 import OrgDashboard from "./pages/OrganizationDashboard/OrgDashboard";
 import DonorDashboard from "./pages/DonorDashboard/DonorDashboard";
@@ -90,6 +91,7 @@ function Layout() {
         />
 
         <Route path="/login" element={<Login />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
 
         <Route
           path="/scan-result"

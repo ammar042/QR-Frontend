@@ -21,7 +21,7 @@ const FAQS = [
     keywords: ["forgot password", "reset password", "lost password", "can't login", "cant login"],
     question: "I forgot my password, what do I do?",
     answer:
-      "Currently, password reset isn't self-service — please contact support directly to have your password reset. We recommend writing down your password somewhere safe after registering.",
+      "Click 'Forgot password?' on the login page, enter your registered email, and we'll send you a password reset link.",
   },
   {
     keywords: ["find", "blood", "near", "search", "nearby"],

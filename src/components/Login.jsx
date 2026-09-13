@@ -23,6 +23,9 @@ const Login = () => {
   const [formData, setFormData] = useState({ identifier: "", password: "" });
   const [otp, setOtp] = useState("");
   const [otpSent, setOtpSent] = useState(false);
+  const [forgotPassword, setForgotPassword] = useState(false);
+  const [forgotEmail, setForgotEmail] = useState("");
+  const [resetEmailSent, setResetEmailSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -144,31 +147,96 @@ const Login = () => {
     }
   };
 
+  const handleForgotPassword = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    setResetEmailSent(false);
+
+    try {
+      await axios.post(`${API_URL}/api/auth/forgot-password`, {
+        email: forgotEmail,
+      });
+      setResetEmailSent(true);
+    } catch (err) {
+      setError(
+        err.response?.data?.message ||
+        "Unable to send the reset email. Please try again later."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const showForgotPassword = () => {
+    setForgotEmail(formData.identifier.includes("@") ? formData.identifier : "");
+    setForgotPassword(true);
+    setError(null);
+    setResetEmailSent(false);
+  };
+
+  const returnToLogin = () => {
+    setForgotPassword(false);
+    setError(null);
+    setResetEmailSent(false);
+  };
+
   return (
     <div className={styles["login-container"]}>
       <div className={styles["login-card"]}>
-        <h2>Welcome Back</h2>
-        <p>Login to your account</p>
-
-        {/* Toggle */}
-        <div className={styles["login-method-toggle"]}>
-          <button
-            className={loginMethod === "password" ? styles.active : ""}
-            onClick={() => setLoginMethod("password")}
-          >
-            Password
-          </button>
-          <button
-            className={loginMethod === "otp" ? styles.active : ""}
-            onClick={() => setLoginMethod("otp")}
-          >
-            OTP Login
-          </button>
-        </div>
+        <h2>{forgotPassword ? "Password Reset" : "Welcome Back"}</h2>
+        {!forgotPassword && <p>Login to your account</p>}
 
         {error && <div className={styles["error-message"]}>{error}</div>}
 
-        {loginMethod === "password" ? (
+        {forgotPassword ? (
+          <form onSubmit={handleForgotPassword}>
+            <div className={styles["form-group"]}>
+              <label htmlFor="forgot-email">Email address</label>
+              <input
+                id="forgot-email"
+                type="email"
+                value={forgotEmail}
+                onChange={(e) => setForgotEmail(e.target.value)}
+                placeholder="Enter your registered email"
+                required
+              />
+            </div>
+            {resetEmailSent && (
+              <div className={styles["success-message"]}>
+                If an account exists for this email, a password reset link has
+                been sent. Please check your inbox.
+              </div>
+            )}
+            <div className={styles["forgot-actions"]}>
+              <button type="button" onClick={returnToLogin}>
+                Back to login
+              </button>
+              <button type="submit" disabled={loading}>
+                {loading ? "Sending..." : "Send an email"}
+              </button>
+            </div>
+          </form>
+        ) : (
+          <>
+            <div className={styles["login-method-toggle"]}>
+              <button
+                type="button"
+                className={loginMethod === "password" ? styles.active : ""}
+                onClick={() => setLoginMethod("password")}
+              >
+                Password
+              </button>
+              <button
+                type="button"
+                className={loginMethod === "otp" ? styles.active : ""}
+                onClick={() => setLoginMethod("otp")}
+              >
+                OTP Login
+              </button>
+            </div>
+
+            {loginMethod === "password" ? (
           <form onSubmit={handlePasswordLogin}>
             <div className={styles["form-group"]}>
               <label>Email or Phone Number</label>
@@ -193,6 +261,13 @@ const Login = () => {
             </div>
             <button type="submit" disabled={loading}>
               {loading ? "Logging in..." : "Login"}
+            </button>
+            <button
+              type="button"
+              className={styles["forgot-link"]}
+              onClick={showForgotPassword}
+            >
+              Forgot password?
             </button>
           </form>
         ) : (
@@ -240,6 +315,8 @@ const Login = () => {
               </form>
             )}
           </div>
+        )}
+          </>
         )}
 
         <div className={styles["register-link"]}>
