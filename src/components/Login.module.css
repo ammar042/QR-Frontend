@@ -2,7 +2,7 @@
     width: 40%;
     margin: auto;
     border-radius: 10px;
-    padding: 80px 40px;
+    padding: 120px 40px 80px;
 }
 
 .reset-container {
@@ -133,13 +133,18 @@ button:hover{
 }
 
 .forgot-link{
-    display:inline-block;
-    margin-top:0;
-    margin-left:16px;
+    margin:0;
     padding:0;
     background:none;
     color:#c2173d;
     font-size:14px;
+}
+
+.login-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
 }
 
 .forgot-link:hover{
@@ -199,7 +204,7 @@ button:disabled{
 @media screen and (max-width: 480px) {
   .login-container {
     width: 100%;
-    padding: 40px 12px;
+    padding: 80px 12px 40px;
   }
 
   .reset-container {
@@ -233,9 +238,10 @@ button:disabled{
     width: 100%;
   }
 
-  .forgot-link {
-    margin-left: 0;
-    margin-top: 14px;
+  .login-actions {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
   }
 
   .otp-actions button {

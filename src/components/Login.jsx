@@ -259,16 +259,18 @@ const Login = () => {
                 required
               />
             </div>
-            <button type="submit" disabled={loading}>
-              {loading ? "Logging in..." : "Login"}
-            </button>
-            <button
-              type="button"
-              className={styles["forgot-link"]}
-              onClick={showForgotPassword}
-            >
-              Forgot password?
-            </button>
+            <div className={styles["login-actions"]}>
+              <button type="submit" disabled={loading}>
+                {loading ? "Logging in..." : "Login"}
+              </button>
+              <button
+                type="button"
+                className={styles["forgot-link"]}
+                onClick={showForgotPassword}
+              >
+                Forgot password?
+              </button>
+            </div>
           </form>
         ) : (
           <div className={styles["otp-login"]}>
