@@ -5,12 +5,12 @@ import LocationPicker from "./LocationPicker";
 
 import { API_URL } from "../config/api";
 const PROVINCE_DISTRICTS = {
-  Punjab: ["Lahore","Faisalabad","Rawalpindi","Gujranwala","Multan","Sialkot","Bahawalpur","Sargodha","Sheikhupura","Jhang","Rahim Yar Khan","Gujrat","Kasur","Sahiwal","Okara","Dera Ghazi Khan","Muzaffargarh","Pakpattan","Hafizabad","Attock"],
-  Sindh: ["Karachi","Hyderabad","Sukkur","Larkana","Nawabshah","Mirpur Khas","Jacobabad","Shikarpur","Khairpur","Dadu","Thatta","Badin","Sanghar","Umerkot","Tando Allahyar"],
-  KPK: ["Peshawar","Mardan","Swat","Abbottabad","Kohat","Mansehra","Nowshera","Charsadda","Bannu","Dera Ismail Khan","Haripur","Swabi","Buner","Malakand","Chitral"],
-  Balochistan: ["Quetta","Turbat","Khuzdar","Hub","Chaman","Gwadar","Zhob","Loralai","Kalat","Panjgur","Nushki","Sibi","Nasirabad","Dera Bugti","Mastung"],
-  "Azad Kashmir": ["Muzaffarabad","Mirpur","Rawalakot","Bagh","Kotli","Bhimber","Neelum","Haveli","Sudhnoti"],
-  Gilgit: ["Gilgit","Skardu","Ghanche","Diamer","Astore","Hunza","Nagar","Ghizer","Shigar"],
+  Punjab: ["Lahore", "Faisalabad", "Rawalpindi", "Gujranwala", "Multan", "Sialkot", "Bahawalpur", "Sargodha", "Sheikhupura", "Jhang", "Rahim Yar Khan", "Gujrat", "Kasur", "Sahiwal", "Okara", "Dera Ghazi Khan", "Muzaffargarh", "Pakpattan", "Hafizabad", "Attock"],
+  Sindh: ["Karachi", "Hyderabad", "Sukkur", "Larkana", "Nawabshah", "Mirpur Khas", "Jacobabad", "Shikarpur", "Khairpur", "Dadu", "Thatta", "Badin", "Sanghar", "Umerkot", "Tando Allahyar"],
+  KPK: ["Peshawar", "Mardan", "Swat", "Abbottabad", "Kohat", "Mansehra", "Nowshera", "Charsadda", "Bannu", "Dera Ismail Khan", "Haripur", "Swabi", "Buner", "Malakand", "Chitral"],
+  Balochistan: ["Quetta", "Turbat", "Khuzdar", "Hub", "Chaman", "Gwadar", "Zhob", "Loralai", "Kalat", "Panjgur", "Nushki", "Sibi", "Nasirabad", "Dera Bugti", "Mastung"],
+  "Azad Kashmir": ["Muzaffarabad", "Mirpur", "Rawalakot", "Bagh", "Kotli", "Bhimber", "Neelum", "Haveli", "Sudhnoti"],
+  Gilgit: ["Gilgit", "Skardu", "Ghanche", "Diamer", "Astore", "Hunza", "Nagar", "Ghizer", "Shigar"],
 };
 
 const RegisterOrganization = () => {
@@ -18,6 +18,7 @@ const RegisterOrganization = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [otp, setOtp] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const [formData, setFormData] = useState({
     organizationName: "",
@@ -160,7 +161,23 @@ const RegisterOrganization = () => {
 
           <div className={styles["form-group"]}>
             <label>Password</label>
-            <input type="password" placeholder="Min 6 characters" name="password" onChange={handleChange} value={formData.password} />
+            <div className={styles["password-wrap"]}>
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Min 6 characters"
+                name="password"
+                onChange={handleChange}
+                value={formData.password}
+              />
+              <button
+                type="button"
+                className={styles["toggle-password"]}
+                onClick={() => setShowPassword((prev) => !prev)}
+                tabIndex={-1}
+              >
+                {showPassword ? "🙈" : "👁️"}
+              </button>
+            </div>
           </div>
 
           {error && <p className={styles["error"]}>{error}</p>}

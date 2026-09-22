@@ -15,7 +15,9 @@
   justify-content: space-between;
 }
 
-.logo { cursor: pointer; }
+.logo {
+  cursor: pointer;
+}
 
 .navRight {
   display: flex;
@@ -23,7 +25,9 @@
   gap: 16px;
 }
 
-.notifIcon { font-size: 20px; }
+.notifIcon {
+  font-size: 20px;
+}
 
 .avatar {
   width: 36px;
@@ -67,7 +71,7 @@
 
 /* ── Org code section ── */
 .orgSection {
-  width:300px;
+  width: 300px;
 }
 
 .orgLabel {
@@ -134,7 +138,9 @@
   transition: background 0.2s;
 }
 
-.orgAddBtn:hover { background: #7f1d1d; }
+.orgAddBtn:hover {
+  background: #7f1d1d;
+}
 
 /* ── Feedback messages ── */
 .success {
@@ -179,7 +185,9 @@
   transition: background 0.2s;
 }
 
-.cancelBtn:hover { background: #f3f4f6; }
+.cancelBtn:hover {
+  background: #f3f4f6;
+}
 
 .submitBtn {
   padding: 11px 28px;
@@ -196,8 +204,15 @@
   transition: background 0.2s;
 }
 
-.submitBtn:hover { background: #7f1d1d; }
-.submitBtn:disabled { background: #d1a3ab; cursor: not-allowed; }
+.submitBtn:hover {
+  background: #7f1d1d;
+}
+
+.submitBtn:disabled {
+  background: #d1a3ab;
+  cursor: not-allowed;
+}
+
 /* ===== Responsive ===== */
 @media screen and (max-width: 900px) {
   .nav {
@@ -242,4 +257,29 @@
     width: 100%;
     justify-content: center;
   }
+}
+
+.navLeft {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.backBtn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: 1px solid #e5e7eb;
+  color: #9f1239;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.backBtn:hover {
+  background: #fef2f2;
 }

@@ -28,6 +28,7 @@ const Login = () => {
   const [resetEmailSent, setResetEmailSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -57,7 +58,7 @@ const Login = () => {
 
         // 2. Try organization login
         try {
-        const response = await axios.post(`${API_URL}/api/org/login`, {
+          const response = await axios.post(`${API_URL}/api/org/login`, {
             email: formData.identifier,
             phone: formData.identifier,
             password: formData.password,
@@ -70,7 +71,7 @@ const Login = () => {
           }
 
           // 3. Try admin login
-        const response = await axios.post(`${API_URL}/api/admin/login`, {
+          const response = await axios.post(`${API_URL}/api/admin/login`, {
             email: formData.identifier,
             password: formData.password,
           });
@@ -237,45 +238,7 @@ const Login = () => {
             </div>
 
             {loginMethod === "password" ? (
-          <form onSubmit={handlePasswordLogin}>
-            <div className={styles["form-group"]}>
-              <label>Email or Phone Number</label>
-              <input
-                type="text"
-                name="identifier"
-                value={formData.identifier}
-                onChange={handleChange}
-                placeholder="Email or phone"
-                required
-              />
-            </div>
-            <div className={styles["form-group"]}>
-              <label>Password</label>
-              <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className={styles["login-actions"]}>
-              <button type="submit" disabled={loading}>
-                {loading ? "Logging in..." : "Login"}
-              </button>
-              <button
-                type="button"
-                className={styles["forgot-link"]}
-                onClick={showForgotPassword}
-              >
-                Forgot password?
-              </button>
-            </div>
-          </form>
-        ) : (
-          <div className={styles["otp-login"]}>
-            {!otpSent ? (
-              <div className={styles["otp-step"]}>
+              <form onSubmit={handlePasswordLogin}>
                 <div className={styles["form-group"]}>
                   <label>Email or Phone Number</label>
                   <input
@@ -283,41 +246,89 @@ const Login = () => {
                     name="identifier"
                     value={formData.identifier}
                     onChange={handleChange}
+                    placeholder="Email or phone"
                     required
                   />
-                </div>
-                <button onClick={handleSendOTP} disabled={loading}>
-                  {loading ? "Sending..." : "Send OTP"}
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleOTPLogin}>
-                <div className={styles["otp-info"]}>
-                  <p>OTP sent to:</p>
-                  <p className={styles["contact-info"]}>{formData.identifier}</p>
                 </div>
                 <div className={styles["form-group"]}>
-                  <label>Enter OTP</label>
-                  <input
-                    type="text"
-                    value={otp}
-                    onChange={(e) => setOtp(e.target.value)}
-                    maxLength="6"
-                    required
-                  />
+                  <label>Password</label>
+                  <div className={styles["password-wrap"]}>
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      name="password"
+                      value={formData.password}
+                      onChange={handleChange}
+                      required
+                    />
+                    <button
+                      type="button"
+                      className={styles["toggle-password"]}
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      tabIndex={-1}
+                    >
+                      {showPassword ? "🙈" : "👁️"}
+                    </button>
+                  </div>
                 </div>
-                <div className={styles["otp-actions"]}>
-                  <button type="button" onClick={handleSendOTP}>
-                    Resend OTP
-                  </button>
+                <div className={styles["login-actions"]}>
                   <button type="submit" disabled={loading}>
-                    {loading ? "Verifying..." : "Login with OTP"}
+                    {loading ? "Logging in..." : "Login"}
+                  </button>
+                  <button
+                    type="button"
+                    className={styles["forgot-link"]}
+                    onClick={showForgotPassword}
+                  >
+                    Forgot password?
                   </button>
                 </div>
               </form>
+            ) : (
+              <div className={styles["otp-login"]}>
+                {!otpSent ? (
+                  <div className={styles["otp-step"]}>
+                    <div className={styles["form-group"]}>
+                      <label>Email or Phone Number</label>
+                      <input
+                        type="text"
+                        name="identifier"
+                        value={formData.identifier}
+                        onChange={handleChange}
+                        required
+                      />
+                    </div>
+                    <button onClick={handleSendOTP} disabled={loading}>
+                      {loading ? "Sending..." : "Send OTP"}
+                    </button>
+                  </div>
+                ) : (
+                  <form onSubmit={handleOTPLogin}>
+                    <div className={styles["otp-info"]}>
+                      <p>OTP sent to:</p>
+                      <p className={styles["contact-info"]}>{formData.identifier}</p>
+                    </div>
+                    <div className={styles["form-group"]}>
+                      <label>Enter OTP</label>
+                      <input
+                        type="text"
+                        value={otp}
+                        onChange={(e) => setOtp(e.target.value)}
+                        maxLength="6"
+                        required
+                      />
+                    </div>
+                    <div className={styles["otp-actions"]}>
+                      <button type="button" onClick={handleSendOTP}>
+                        Resend OTP
+                      </button>
+                      <button type="submit" disabled={loading}>
+                        {loading ? "Verifying..." : "Login with OTP"}
+                      </button>
+                    </div>
+                  </form>
+                )}
+              </div>
             )}
-          </div>
-        )}
           </>
         )}
 

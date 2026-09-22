@@ -110,6 +110,7 @@
   background: #fff !important;
   border: 1px solid #ccc !important;
 }
+
 /* ===== Responsive ===== */
 @media screen and (max-width: 1024px) {
   .org-container {
@@ -158,4 +159,26 @@
   .submit-row button {
     width: 100%;
   }
+}
+
+.password-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrap input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px;
+  line-height: 1;
 }

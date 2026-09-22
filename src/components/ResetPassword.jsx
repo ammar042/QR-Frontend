@@ -11,6 +11,8 @@ const ResetPassword = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -43,25 +45,45 @@ const ResetPassword = () => {
         <form onSubmit={handleSubmit}>
           <div className={styles["form-group"]}>
             <label htmlFor="new-password">New password</label>
-            <input
-              id="new-password"
-              type="password"
-              value={formData.password}
-              onChange={(event) => setFormData({ ...formData, password: event.target.value })}
-              minLength="6"
-              required
-            />
+            <div className={styles["password-wrap"]}>
+              <input
+                id="new-password"
+                type={showPassword ? "text" : "password"}
+                value={formData.password}
+                onChange={(event) => setFormData({ ...formData, password: event.target.value })}
+                minLength="6"
+                required
+              />
+              <button
+                type="button"
+                className={styles["toggle-password"]}
+                onClick={() => setShowPassword((prev) => !prev)}
+                tabIndex={-1}
+              >
+                {showPassword ? "🙈" : "👁️"}
+              </button>
+            </div>
           </div>
           <div className={styles["form-group"]}>
             <label htmlFor="confirm-password">Confirm password</label>
-            <input
-              id="confirm-password"
-              type="password"
-              value={formData.confirmPassword}
-              onChange={(event) => setFormData({ ...formData, confirmPassword: event.target.value })}
-              minLength="6"
-              required
-            />
+            <div className={styles["password-wrap"]}>
+              <input
+                id="confirm-password"
+                type={showConfirmPassword ? "text" : "password"}
+                value={formData.confirmPassword}
+                onChange={(event) => setFormData({ ...formData, confirmPassword: event.target.value })}
+                minLength="6"
+                required
+              />
+              <button
+                type="button"
+                className={styles["toggle-password"]}
+                onClick={() => setShowConfirmPassword((prev) => !prev)}
+                tabIndex={-1}
+              >
+                {showConfirmPassword ? "🙈" : "👁️"}
+              </button>
+            </div>
           </div>
           <button type="submit" disabled={loading || Boolean(success)}>
             {loading ? "Updating..." : "Update password"}

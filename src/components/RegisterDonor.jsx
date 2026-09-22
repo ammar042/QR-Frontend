@@ -31,9 +31,11 @@ const RegisterDonor = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleLocationSelect = ({ lat, lng }) => {
-   setFormData((prev) => ({ ...prev, latitude: lat, longitude: lng }));
+    setFormData((prev) => ({ ...prev, latitude: lat, longitude: lng }));
   };
 
   const handleChange = (e) => {
@@ -58,23 +60,23 @@ const RegisterDonor = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!formData.latitude || !formData.longitude) {
       setError("Please set your location on the map.");
-     return false;
+      return false;
     }
-    
+
     if (!validateForm()) return;
-    
+
     setLoading(true);
     setError(null);
-    
+
     try {
       const otpResponse = await axios.post(`${API_URL}/api/auth/send-registration-otp`, {
         phone: formData.phone,
         email: formData.email
       });
-      
+
       if (otpResponse.data.success) {
         setStep(2);
       }
@@ -133,7 +135,7 @@ const RegisterDonor = () => {
   const handleResendOTP = async () => {
     setLoading(true);
     setError(null);
-    
+
     try {
       await axios.post(`${API_URL}/api/auth/send-registration-otp`, {
         phone: formData.phone,
@@ -158,7 +160,7 @@ const RegisterDonor = () => {
           <strong>Error:</strong> {error}
         </div>
       )}
-      
+
       {success && (
         <div className={styles.successMessage}>
           Registration Successful! Redirecting to login...
@@ -170,18 +172,18 @@ const RegisterDonor = () => {
           <div className={styles.formRow}>
             <label>Full Name *</label>
             <div className={styles.inputGroup}>
-              <input 
-                type="text" 
-                placeholder="First" 
-                name="firstName" 
+              <input
+                type="text"
+                placeholder="First"
+                name="firstName"
                 value={formData.firstName}
                 onChange={handleChange}
                 required
               />
-              <input 
-                type="text" 
-                placeholder="Last Name" 
-                name="lastName" 
+              <input
+                type="text"
+                placeholder="Last Name"
+                name="lastName"
                 value={formData.lastName}
                 onChange={handleChange}
                 required
@@ -191,10 +193,10 @@ const RegisterDonor = () => {
 
           <div className={styles.formRow}>
             <label>Phone Number *</label>
-            <input 
-              type="tel" 
-              placeholder="Enter phone number" 
-              name="phone" 
+            <input
+              type="tel"
+              placeholder="Enter phone number"
+              name="phone"
               value={formData.phone}
               onChange={handleChange}
               required
@@ -203,10 +205,10 @@ const RegisterDonor = () => {
 
           <div className={styles.formRow}>
             <label>Email *</label>
-            <input 
-              type="email" 
-              placeholder="Enter email" 
-              name="email" 
+            <input
+              type="email"
+              placeholder="Enter email"
+              name="email"
               value={formData.email}
               onChange={handleChange}
               required
@@ -215,34 +217,54 @@ const RegisterDonor = () => {
 
           <div className={styles.formRow}>
             <label>Password *</label>
-            <input 
-              type="password" 
-              placeholder="Create password (min. 6 characters)" 
-              name="password" 
-              value={formData.password}
-              onChange={handleChange}
-              required
-              minLength="6"
-            />
+            <div className={styles.passwordWrap}>
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Create password (min. 6 characters)"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                minLength="6"
+              />
+              <button
+                type="button"
+                className={styles.togglePassword}
+                onClick={() => setShowPassword((prev) => !prev)}
+                tabIndex={-1}
+              >
+                {showPassword ? "🙈" : "👁️"}
+              </button>
+            </div>
           </div>
 
           <div className={styles.formRow}>
             <label>Confirm Password *</label>
-            <input 
-              type="password" 
-              placeholder="Confirm password" 
-              name="confirmPassword" 
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              required
-            />
+            <div className={styles.passwordWrap}>
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                placeholder="Confirm password"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+              />
+              <button
+                type="button"
+                className={styles.togglePassword}
+                onClick={() => setShowConfirmPassword((prev) => !prev)}
+                tabIndex={-1}
+              >
+                {showConfirmPassword ? "🙈" : "👁️"}
+              </button>
+            </div>
           </div>
 
           <div className={styles.formRow}>
             <label>Address *</label>
-            <textarea 
-              placeholder="Enter your address" 
-              name="address" 
+            <textarea
+              placeholder="Enter your address"
+              name="address"
               value={formData.address}
               onChange={handleChange}
               required
@@ -251,14 +273,14 @@ const RegisterDonor = () => {
           <div className={styles.formRow}>
             <label>Pin Your Location *</label>
             <LocationPicker onLocationSelect={handleLocationSelect} />
-         </div>
+          </div>
 
           <div className={styles.formRow}>
             <label>Age *</label>
-            <input 
-              type="number" 
-              placeholder="Age" 
-              name="age" 
+            <input
+              type="number"
+              placeholder="Age"
+              name="age"
               value={formData.age}
               onChange={handleChange}
               min="18"
@@ -306,9 +328,9 @@ const RegisterDonor = () => {
 
           <div className={styles.formRow}>
             <label>PinCode *</label>
-            <input 
-              type="text" 
-              name="pincode" 
+            <input
+              type="text"
+              name="pincode"
               value={formData.pincode}
               onChange={handleChange}
               pattern="[0-9]{5,6}"
@@ -320,17 +342,17 @@ const RegisterDonor = () => {
           <div className={styles.formRow}>
             <label>Last Donation (Optional)</label>
             <div className={styles.inputGroup}>
-              <input 
-                type="text" 
-                placeholder="Month" 
-                name="month" 
+              <input
+                type="text"
+                placeholder="Month"
+                name="month"
                 value={formData.month}
                 onChange={handleChange}
               />
-              <input 
-                type="text" 
-                placeholder="Year" 
-                name="year" 
+              <input
+                type="text"
+                placeholder="Year"
+                name="year"
                 value={formData.year}
                 onChange={handleChange}
                 pattern="[0-9]{4}"
@@ -340,7 +362,7 @@ const RegisterDonor = () => {
           </div>
 
           <div className={styles.checkboxRow}>
-            <input 
+            <input
               type="checkbox"
               name="agreedToTerms"
               checked={formData.agreedToTerms}
@@ -368,9 +390,9 @@ const RegisterDonor = () => {
 
           <div className={styles.formRow}>
             <label>Enter OTP *</label>
-            <input 
-              type="text" 
-              placeholder="Enter 6-digit OTP" 
+            <input
+              type="text"
+              placeholder="Enter 6-digit OTP"
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
               maxLength="6"
