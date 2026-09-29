@@ -150,9 +150,6 @@ const Footer = () => {
         <div className={styles.column}>
           <h4>COMPANY</h4>
           <Link to="/about">About Us</Link>
-          <a href="#contact" onClick={scrollToContact}>
-            Contact Us
-          </a>
         </div>
 
         {/* Contact */}
