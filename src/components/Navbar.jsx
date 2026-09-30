@@ -49,6 +49,10 @@ const Navbar = () => {
             <Link to="/find-blood" onClick={() => setMenuOpen(false)}>Find Blood</Link>
           </li>
 
+          <li className={styles.navItem}>
+            <Link to="/contact" onClick={() => setMenuOpen(false)}>Contact Us</Link>
+          </li>
+
           {/* Register Dropdown */}
           <li 
             className={styles.navItem + " " + styles.dropdown}

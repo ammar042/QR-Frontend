@@ -19,6 +19,7 @@ import EditProfile from "./pages/EditProfile/Editprofile";
 import Chatbot from "./components/Chatbot";
 import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
 import ScanResult from "./pages/ScanResult/ScanResult";
+import ContactUs from "./pages/ContactUs";
 
 import "./App.css";
 
@@ -77,6 +78,7 @@ function Layout() {
         <Route path="/" element={<HomePage />} />
 
         <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<ContactUs />} />
 
         <Route path="/find-blood" element={<FindBlood />} />
 

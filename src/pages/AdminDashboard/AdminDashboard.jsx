@@ -5,6 +5,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import styles from "./AdminDashboard.module.css";
 import AdminReportsCard from "./AdminReportsCard/AdminReportsCard";
+import ComplaintsPanel from "./ComplaintsPanel";
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -30,7 +31,7 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [tab, setTab] = useState("overview"); // overview | donors | orgs | reports | map
+  const [tab, setTab] = useState("overview"); // overview | donors | orgs | reports | map | complaints
 
 const token = localStorage.getItem("token");
 
@@ -99,13 +100,13 @@ const token = localStorage.getItem("token");
 
         {/* Tabs */}
         <div className={styles.tabs}>
-          {["overview", "donors", "orgs", "reports", "map"].map((t) => (
+          {["overview", "donors", "orgs", "reports", "map", "complaints"].map((t) => (
             <button
               key={t}
               className={tab === t ? styles.tabActive : styles.tabBtn}
               onClick={() => setTab(t)}
             >
-              {t === "overview" ? "Overview" : t === "donors" ? "Donors" : t === "orgs" ? "Organizations" : t === "reports" ? "Reports" : "Map View"}
+              {t === "overview" ? "Overview" : t === "donors" ? "Donors" : t === "orgs" ? "Organizations" : t === "reports" ? "Reports" : t === "map" ? "Map View" : "Complaints"}
             </button>
           ))}
         </div>
@@ -114,6 +115,8 @@ const token = localStorage.getItem("token");
         {tab === "reports" && (
           <AdminReportsCard token={token} organizations={organizations} />
         )}
+
+        {tab === "complaints" && <ComplaintsPanel token={token} />}
 
         {/* Donors table */}
         {(tab === "overview" || tab === "donors") && (

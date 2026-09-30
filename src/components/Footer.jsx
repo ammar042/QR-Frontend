@@ -150,6 +150,7 @@ const Footer = () => {
         <div className={styles.column}>
           <h4>COMPANY</h4>
           <Link to="/about">About Us</Link>
+          <Link to="/contact">Contact Us</Link>
         </div>
 
         {/* Contact */}

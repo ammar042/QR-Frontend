@@ -1,0 +1,23 @@
+.panel { padding:22px; border-radius:14px; background:#fff; box-shadow:0 1px 6px #0000000f; }
+.header { display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:20px; }
+.header span { color:#9f1239; font-size:11px; font-weight:800; letter-spacing:1.4px; }
+.header h3 { margin:4px 0; font-size:22px; color:#1f2937; }
+.header p { color:#6b7280; font-size:13px; }
+.refresh,.filters button { padding:8px 13px; border:1px solid #e5e7eb; border-radius:8px; background:#fff; color:#374151; cursor:pointer; }
+.filters { display:flex; gap:8px; margin-bottom:18px; }
+.filters .selected { border-color:#9f1239; background:#9f1239; color:white; }
+.list { display:grid; gap:14px; }
+.item { padding:18px; border:1px solid #eceef1; border-radius:12px; }
+.itemTop { display:flex; justify-content:space-between; gap:12px; align-items:flex-start; }
+.itemTop h4 { margin:8px 0; color:#1f2937; font-size:17px; }
+.itemTop time { color:#77808d; font-size:12px; }
+.status { display:inline-block; padding:4px 9px; border-radius:99px; font-size:11px; font-weight:700; text-transform:capitalize; }
+.open { color:#92400e; background:#fef3c7; }.responded { color:#166534; background:#dcfce7; }
+.sender { display:flex; flex-wrap:wrap; gap:12px; margin:4px 0 14px; font-size:13px; }.sender a { color:#2563eb; text-decoration:none; }
+.message { padding:14px; border-radius:8px; background:#f8fafc; color:#374151; line-height:1.65; white-space:pre-wrap; }
+.previous { margin-top:12px; padding:12px; border-left:3px solid #16a34a; background:#f0fdf4; color:#334155; font-size:13px; }.previous p { margin:6px 0; white-space:pre-wrap; }.previous small { color:#64748b; }
+.replyLabel { display:grid; gap:7px; margin-top:14px; color:#374151; font-size:13px; font-weight:700; }
+.replyLabel textarea { width:100%; padding:11px; border:1px solid #d1d5db; border-radius:8px; resize:vertical; font:inherit; font-weight:400; }
+.send { margin-top:10px; padding:10px 14px; border:0; border-radius:8px; background:#9f1239; color:white; font-weight:700; cursor:pointer; }
+.empty { padding:30px 12px; text-align:center; color:#6b7280; }.error,.notice { margin:12px 0; padding:11px 13px; border-radius:8px; font-size:13px; }.error { color:#991b1b; background:#fef2f2; }.notice { color:#166534; background:#f0fdf4; }
+@media(max-width:580px) { .panel { padding:16px; }.itemTop { display:block; }.itemTop time { display:block; margin:4px 0 10px; }.filters { flex-wrap:wrap; } }
